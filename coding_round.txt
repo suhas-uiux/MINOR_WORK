@@ -1,0 +1,30 @@
+1. The Gatekeeper’s Secret Number
+At the entrance of a mystical fortress, a gatekeeper challenges you with a number puzzle.
+
+He says:
+“If the number you choose can only be divided evenly by 1 and itself, the gate will open. Otherwise, it stays locked.”
+
+Write a program to check whether the number meets this condition.
+--------------------------------------------------------------------------------------------------------------------------
+2. The Ancient Sequence Scroll
+You discover an old scroll with a strange number pattern:
+Each number in the pattern is the sum of the two numbers that come before it, starting with 0 and 1.
+
+The scroll contains a secret:
+
+If the position you choose in the sequence is odd, show the sequence from that position backwards to the start.
+
+If the position is even, show the sequence forwards from the start to that position.
+
+Write a program that, given a position number, prints the sequence according to these rules.
+-------------------------------------------------------------------------------------------------------------------------
+3. The Enchanted Treasure Chest
+You find a treasure chest with a numeric lock. To open it, you need to:
+
+Add together all the digits of the number written on the chest.
+
+Then multiply all whole numbers from 1 up to that sum to get a special code.
+
+Enter that code to unlock the chest.
+
+Write a function that takes the number on the chest and returns this special code
