@@ -96,3 +96,102 @@ public class BuggyCalculator {
 | ❌ Missing case for multiplication               | ✅ Added `case 3:` with correct logic                             |
 | ❌ Missing `break` statements caused fallthrough | ✅ Added `break` to each case                                     |
 
+--------------------------------------------------------------------------------------------------------------------------------
+
+                                            CORRECTED CODE
+    
+    import java.util.Scanner;
+
+public class BuggyCalculator {
+
+    // Correct addition method
+    public static double add(double item1Price, double item2Price) {
+        return item1Price + item2Price;
+    }
+
+    // Fixed subtraction: it was incorrectly doing addition earlier
+    public static double subtract(double item1Price, double item2Price) {
+        return item1Price - item2Price;
+    }
+
+    // Multiplication method is fine
+    public static double multiply(double item1Price, double item2Price) {
+        return item1Price * item2Price;
+    }
+
+    // Division with zero check to avoid Infinity or crash
+    public static double divide(double item1Price, double item2Price) {
+        if (item2Price == 0) {
+            System.out.println("Error: Cannot divide by zero.");
+            return Double.NaN; // Return NaN to indicate an invalid result
+        }
+        return item1Price / item2Price;
+    }
+
+    // Tax calculation with input validation
+    public static double calculateTotalWithTax(double itemPrice) {
+        if (itemPrice < 0) {
+            System.out.println("Error: Negative price is not allowed.");
+            return 0;
+        }
+        double taxRate = 0.18;
+        return itemPrice + (itemPrice * taxRate);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Welcome to Raj’s Reliable Calculator!");
+        System.out.println("Select operation:");
+        System.out.println("1. + (Addition)");
+        System.out.println("2. - (Subtraction)");
+        System.out.println("3. * (Multiplication)");
+        System.out.println("4. / (Division)");
+        System.out.println("5. Calculate Total with Tax");
+
+        int choice = sc.nextInt();
+        double item1Price, item2Price, itemPrice;
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter prices of two items: ");
+                item1Price = sc.nextDouble();
+                item2Price = sc.nextDouble();
+                System.out.println("Result: " + add(item1Price, item2Price));
+                break;
+
+            case 2:
+                System.out.print("Enter prices of two items: ");
+                item1Price = sc.nextDouble();
+                item2Price = sc.nextDouble();
+                System.out.println("Result: " + subtract(item1Price, item2Price));
+                break;
+
+            case 3:
+                System.out.print("Enter prices of two items: ");
+                item1Price = sc.nextDouble();
+                item2Price = sc.nextDouble();
+                System.out.println("Result: " + multiply(item1Price, item2Price));
+                break;
+
+            case 4:
+                System.out.print("Enter prices of two items: ");
+                item1Price = sc.nextDouble();
+                item2Price = sc.nextDouble();
+                System.out.println("Result: " + divide(item1Price, item2Price));
+                break;
+
+            case 5:
+                System.out.print("Enter price of the item: ");
+                itemPrice = sc.nextDouble();
+                System.out.println("Total with Tax: ₹" + calculateTotalWithTax(itemPrice));
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+
+        sc.close();
+    }
+}
+
