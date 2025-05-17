@@ -79,3 +79,13 @@ int main() {
 
     return 0;
 }
+----------------------------------------------------------------------------------------------------------------------------
+    | Bug                                             | Fix                                                              |
+| ----------------------------------------------- | ---------------------------------------------------------------- |
+| ❌ Subtraction used addition logic               | ✅ Changed `item1Price + item2Price` to `item1Price - item2Price` |
+| ❌ No check for divide by zero                   | ✅ Added check to avoid dividing by zero                          |
+| ❌ Tax function returned price as-is             | ✅ Implemented correct tax formula: `price + (price * 0.18)`      |
+| ❌ Negative item prices allowed                  | ✅ Validation added to reject negative prices in tax calculation  |
+| ❌ Missing case for multiplication               | ✅ Added `case 3:` with correct logic                             |
+| ❌ Missing `break` statements caused fallthrough | ✅ Added `break` to each case                                     |
+
