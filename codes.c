@@ -80,12 +80,94 @@ int main() {
     return 0;
 }
 ----------------------------------------------------------------------------------------------------------------------------
-    | Bug                                             | Fix                                                              |
-| ----------------------------------------------- | ---------------------------------------------------------------- |
-| ❌ Subtraction used addition logic               | ✅ Changed `item1Price + item2Price` to `item1Price - item2Price` |
-| ❌ No check for divide by zero                   | ✅ Added check to avoid dividing by zero                          |
-| ❌ Tax function returned price as-is             | ✅ Implemented correct tax formula: `price + (price * 0.18)`      |
-| ❌ Negative item prices allowed                  | ✅ Validation added to reject negative prices in tax calculation  |
-| ❌ Missing case for multiplication               | ✅ Added `case 3:` with correct logic                             |
-| ❌ Missing `break` statements caused fallthrough | ✅ Added `break` to each case                                     |
+| Bug/Issue                     | Fix Applied                                  |
+| ----------------------------- | -------------------------------------------- |
+| ❌ Subtraction was wrong       | ✅ Changed `+` to `-` in subtraction function |
+| ❌ No division by zero check   | ✅ Added zero check and error message         |
+| ❌ No tax added in calculation | ✅ Applied 18% tax logic                      |
+| ❌ Negative price allowed      | ✅ Checked and blocked negative input         |
+| ❌ No `break` statements       | ✅ Added `break` in all switch cases          |
+
+    ---------------------------------------------------------------------------------------------------------------------
+                                    CORRCTED CODE
+
+
+    #include <stdio.h>
+
+double add(double item1Price, double item2Price) {
+    return item1Price + item2Price;
+}
+
+double subtract(double item1Price, double item2Price) {
+    return item1Price - item2Price; // ✅ Fixed: subtraction
+}
+
+double multiply(double item1Price, double item2Price) {
+    return item1Price * item2Price;
+}
+
+double divide(double item1Price, double item2Price) {
+    if (item2Price == 0) {
+        printf("Error: Cannot divide by zero.\n");
+        return 0.0;
+    }
+    return item1Price / item2Price;
+}
+
+double calculateTotalWithTax(double itemPrice) {
+    if (itemPrice < 0) {
+        printf("Error: Negative price is not allowed.\n");
+        return 0.0;
+    }
+    double taxRate = 0.18;
+    return itemPrice + (itemPrice * taxRate);
+}
+
+int main() {
+    int choice;
+    double item1Price, item2Price, itemPrice;
+
+    printf("Welcome to Raj’s Reliable Calculator!\n");
+    printf("Select operation:\n");
+    printf("1. + (Addition)\n");
+    printf("2. - (Subtraction)\n");
+    printf("3. * (Multiplication)\n");
+    printf("4. / (Division)\n");
+    printf("5. Calculate Total with Tax\n");
+
+    scanf("%d", &choice);
+
+    switch(choice) {
+        case 1:
+            printf("Enter prices of two items: ");
+            scanf("%lf %lf", &item1Price, &item2Price);
+            printf("Result: %lf\n", add(item1Price, item2Price));
+            break;
+        case 2:
+            printf("Enter prices of two items: ");
+            scanf("%lf %lf", &item1Price, &item2Price);
+            printf("Result: %lf\n", subtract(item1Price, item2Price));
+            break;
+        case 3:
+            printf("Enter prices of two items: ");
+            scanf("%lf %lf", &item1Price, &item2Price);
+            printf("Result: %lf\n", multiply(item1Price, item2Price));
+            break;
+        case 4:
+            printf("Enter prices of two items: ");
+            scanf("%lf %lf", &item1Price, &item2Price);
+            printf("Result: %lf\n", divide(item1Price, item2Price));
+            break;
+        case 5:
+            printf("Enter price of the item: ");
+            scanf("%lf", &itemPrice);
+            printf("Total with Tax: ₹%lf\n", calculateTotalWithTax(itemPrice));
+            break;
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
+
 
