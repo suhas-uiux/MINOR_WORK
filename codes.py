@@ -20,19 +20,20 @@ def add(item1_price, item2_price):
     return item1_price + item2_price
 
 def subtract(item1_price, item2_price):
-    return item1_price + item2_price  # Bug: should subtract
+    return item1_price -- item2_price 
 
 def multiply(item1_price, item2_price):
     return item1_price * item2_price
 
 def divide(item1_price, item2_price):
-    return item1_price / item2_price  # No division by zero handling
+    return item1_price / item2_price
 
 def calculate_total_with_tax(item_price):
-    return item_price  # Bug: tax not added
+    tax_rate = 0.18  # 18% tax
+    return tax_rate
 
 def main():
-    print("Welcome to Raj’s Buggy Calculator!")
+    print("Welcome to Raj's Buggy Calculator!") 
     print("Select operation:")
     print("1. + (Addition)")
     print("2. - (Subtraction)")
@@ -40,70 +41,60 @@ def main():
     print("4. / (Division)")
     print("5. Calculate Total with Tax")
 
-    choice = int(input())
+choice = int(input)
 
     if choice == 1:
-        item1_price = float(input("Enter prices of two items: ").split()[0])
-        item2_price = float(input().split()[0])
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", add(item1_price, item2_price))
     if choice == 2:
-        item1_price = float(input("Enter prices of two items: ").split()[0])
-        item2_price = float(input().split()[0])
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", subtract(item1_price, item2_price))
     if choice == 3:
-        item1_price = float(input("Enter prices of two items: ").split()[0])
-        item2_price = float(input().split()[0])
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", multiply(item1_price, item2_price))
     if choice == 4:
-        item1_price = float(input("Enter prices of two items: ").split()[0])
-        item2_price = float(input().split()[0])
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", divide(item1_price, item2_price))
     if choice == 5:
-        item_price = float(input("Enter price of the item: "))
+        item_price = float(input("Enter item price: "))
         print("Total with Tax: ₹", calculate_total_with_tax(item_price))
     else:
         print("Invalid choice.")
 
-if __name__ == "__main__":
+if name_ == "_main_";
     main()
 ------------------------------------------------------------------------------------------------------------------
-| Issue                                           | Fix                                           |
-| ----------------------------------------------- | --------------------------------------------- |
-| ❌ Subtraction was using addition                | ✅ Corrected to `item1_price - item2_price`    |
-| ❌ Division by zero allowed                      | ✅ Added check and returned error message      |
-| ❌ Tax function didn't calculate tax             | ✅ Implemented `price + price * 0.18`          |
-| ❌ Negative price accepted                       | ✅ Added validation in tax function            |
-| ❌ Input parsing with `.split()` was unnecessary | ✅ Simplified with direct input and conversion |
-| ❌ No `elif`, so all if-blocks executed          | ✅ Replaced with `elif` to prevent fallthrough |
-
-
+subtract used --, fixed to -
+choice = int(input) → choice = int(input())
+Changed multiple ifs to if/elif to avoid multiple blocks running
+calculate_total_with_tax now returns item_price + tax, not just tax rate
+Fixed if __name__ == "__main__": syntax (underscores and colon)
+Proper indentation (your posted snippet had wrong indentation)
     ---------------------------------------------------------------------------------------------------------------
                                     CORRECTED CODE
 
-    def add(item1_price, item2_price):
+   def add(item1_price, item2_price):
     return item1_price + item2_price
 
 def subtract(item1_price, item2_price):
-    return item1_price - item2_price  # Fixed: corrected to subtraction
+    return item1_price - item2_price  # Fixed: changed '--' to '-'
 
 def multiply(item1_price, item2_price):
     return item1_price * item2_price
 
 def divide(item1_price, item2_price):
-    if item2_price == 0:
-        print("Error: Cannot divide by zero.")
-        return None  # Return None to indicate error
     return item1_price / item2_price
 
 def calculate_total_with_tax(item_price):
-    if item_price < 0:
-        print("Error: Negative price is not allowed.")
-        return None
-    tax_rate = 0.18
-    return item_price + (item_price * tax_rate)
+    tax_rate = 0.18  # 18% tax
+    return item_price + (item_price * tax_rate)  # Fixed: added actual tax calculation
 
 def main():
-    print("Welcome to Raj’s Reliable Calculator!")
+    print("Welcome to Raj's Buggy Calculator!") 
     print("Select operation:")
     print("1. + (Addition)")
     print("2. - (Subtraction)")
@@ -111,43 +102,29 @@ def main():
     print("4. / (Division)")
     print("5. Calculate Total with Tax")
 
-    try:
-        choice = int(input("Enter your choice (1-5): "))
-    except ValueError:
-        print("Invalid input. Please enter a number.")
-        return
+    choice = int(input())  # Fixed: added parentheses to input()
 
     if choice == 1:
-        item1_price = float(input("Enter price of first item: "))
-        item2_price = float(input("Enter price of second item: "))
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", add(item1_price, item2_price))
-
-    elif choice == 2:
-        item1_price = float(input("Enter price of first item: "))
-        item2_price = float(input("Enter price of second item: "))
+    elif choice == 2:  # Changed to elif for proper control flow
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", subtract(item1_price, item2_price))
-
     elif choice == 3:
-        item1_price = float(input("Enter price of first item: "))
-        item2_price = float(input("Enter price of second item: "))
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
         print("Result:", multiply(item1_price, item2_price))
-
     elif choice == 4:
-        item1_price = float(input("Enter price of first item: "))
-        item2_price = float(input("Enter price of second item: "))
-        result = divide(item1_price, item2_price)
-        if result is not None:
-            print("Result:", result)
-
+        item1_price = float(input("Enter first item price: "))
+        item2_price = float(input("Enter second item price: "))
+        print("Result:", divide(item1_price, item2_price))
     elif choice == 5:
-        item_price = float(input("Enter price of the item: "))
-        result = calculate_total_with_tax(item_price)
-        if result is not None:
-            print("Total with Tax: ₹", result)
-
+        item_price = float(input("Enter item price: "))
+        print("Total with Tax: ₹", calculate_total_with_tax(item_price))
     else:
         print("Invalid choice.")
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Fixed: correct syntax for main guard
     main()
-
