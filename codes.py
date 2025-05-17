@@ -67,11 +67,87 @@ def main():
 if __name__ == "__main__":
     main()
 ------------------------------------------------------------------------------------------------------------------
-| Bug                                             | Fix                                                              |
-| ----------------------------------------------- | ---------------------------------------------------------------- |
-| ❌ Subtraction used addition logic               | ✅ Changed `item1Price + item2Price` to `item1Price - item2Price` |
-| ❌ No check for divide by zero                   | ✅ Added check to avoid dividing by zero                          |
-| ❌ Tax function returned price as-is             | ✅ Implemented correct tax formula: `price + (price * 0.18)`      |
-| ❌ Negative item prices allowed                  | ✅ Validation added to reject negative prices in tax calculation  |
-| ❌ Missing case for multiplication               | ✅ Added `case 3:` with correct logic                             |
-| ❌ Missing `break` statements caused fallthrough | ✅ Added `break` to each case                                     |
+| Issue                                           | Fix                                           |
+| ----------------------------------------------- | --------------------------------------------- |
+| ❌ Subtraction was using addition                | ✅ Corrected to `item1_price - item2_price`    |
+| ❌ Division by zero allowed                      | ✅ Added check and returned error message      |
+| ❌ Tax function didn't calculate tax             | ✅ Implemented `price + price * 0.18`          |
+| ❌ Negative price accepted                       | ✅ Added validation in tax function            |
+| ❌ Input parsing with `.split()` was unnecessary | ✅ Simplified with direct input and conversion |
+| ❌ No `elif`, so all if-blocks executed          | ✅ Replaced with `elif` to prevent fallthrough |
+
+
+    ---------------------------------------------------------------------------------------------------------------
+                                    CORRECTED CODE
+
+    def add(item1_price, item2_price):
+    return item1_price + item2_price
+
+def subtract(item1_price, item2_price):
+    return item1_price - item2_price  # Fixed: corrected to subtraction
+
+def multiply(item1_price, item2_price):
+    return item1_price * item2_price
+
+def divide(item1_price, item2_price):
+    if item2_price == 0:
+        print("Error: Cannot divide by zero.")
+        return None  # Return None to indicate error
+    return item1_price / item2_price
+
+def calculate_total_with_tax(item_price):
+    if item_price < 0:
+        print("Error: Negative price is not allowed.")
+        return None
+    tax_rate = 0.18
+    return item_price + (item_price * tax_rate)
+
+def main():
+    print("Welcome to Raj’s Reliable Calculator!")
+    print("Select operation:")
+    print("1. + (Addition)")
+    print("2. - (Subtraction)")
+    print("3. * (Multiplication)")
+    print("4. / (Division)")
+    print("5. Calculate Total with Tax")
+
+    try:
+        choice = int(input("Enter your choice (1-5): "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    if choice == 1:
+        item1_price = float(input("Enter price of first item: "))
+        item2_price = float(input("Enter price of second item: "))
+        print("Result:", add(item1_price, item2_price))
+
+    elif choice == 2:
+        item1_price = float(input("Enter price of first item: "))
+        item2_price = float(input("Enter price of second item: "))
+        print("Result:", subtract(item1_price, item2_price))
+
+    elif choice == 3:
+        item1_price = float(input("Enter price of first item: "))
+        item2_price = float(input("Enter price of second item: "))
+        print("Result:", multiply(item1_price, item2_price))
+
+    elif choice == 4:
+        item1_price = float(input("Enter price of first item: "))
+        item2_price = float(input("Enter price of second item: "))
+        result = divide(item1_price, item2_price)
+        if result is not None:
+            print("Result:", result)
+
+    elif choice == 5:
+        item_price = float(input("Enter price of the item: "))
+        result = calculate_total_with_tax(item_price)
+        if result is not None:
+            print("Total with Tax: ₹", result)
+
+    else:
+        print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
+
