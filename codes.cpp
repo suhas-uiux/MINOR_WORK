@@ -80,11 +80,91 @@ int main() {
     return 0;
 }
 ---------------------------------------------------------------------------------------------------------------------------------
-    | Bug                                             | Fix                                                              |
-| ----------------------------------------------- | ---------------------------------------------------------------- |
-| ❌ Subtraction used addition logic               | ✅ Changed `item1Price + item2Price` to `item1Price - item2Price` |
-| ❌ No check for divide by zero                   | ✅ Added check to avoid dividing by zero                          |
-| ❌ Tax function returned price as-is             | ✅ Implemented correct tax formula: `price + (price * 0.18)`      |
-| ❌ Negative item prices allowed                  | ✅ Validation added to reject negative prices in tax calculation  |
-| ❌ Missing case for multiplication               | ✅ Added `case 3:` with correct logic                             |
-| ❌ Missing `break` statements caused fallthrough | ✅ Added `break` to each case                                     |
+| Bug/Issue                     | Fix Applied                                  |
+| ----------------------------- | -------------------------------------------- |
+| ❌ Subtraction was wrong       | ✅ Changed `+` to `-` in subtraction function |
+| ❌ No division by zero check   | ✅ Added zero check and error message         |
+| ❌ No tax added in calculation | ✅ Applied 18% tax logic                      |
+| ❌ Negative price allowed      | ✅ Checked and blocked negative input         |
+| ❌ No `break` statements       | ✅ Added `break` in all switch cases          |
+
+--------------------------------------------------------------------------------------------------------------------------------
+                                    CORRECTED CODE
+    #include <iostream>
+using namespace std;
+
+double add(double item1Price, double item2Price) {
+    return item1Price + item2Price;
+}
+
+double subtract(double item1Price, double item2Price) {
+    return item1Price - item2Price; // ✅ Fixed: subtraction
+}
+
+double multiply(double item1Price, double item2Price) {
+    return item1Price * item2Price;
+}
+
+double divide(double item1Price, double item2Price) {
+    if (item2Price == 0) {
+        cout << "Error: Cannot divide by zero." << endl;
+        return 0.0;
+    }
+    return item1Price / item2Price;
+}
+
+double calculateTotalWithTax(double itemPrice) {
+    if (itemPrice < 0) {
+        cout << "Error: Negative price is not allowed." << endl;
+        return 0.0;
+    }
+    double taxRate = 0.18;
+    return itemPrice + (itemPrice * taxRate);
+}
+
+int main() {
+    cout << "Welcome to Raj’s Reliable Calculator!" << endl;
+    cout << "Select operation:" << endl;
+    cout << "1. + (Addition)" << endl;
+    cout << "2. - (Subtraction)" << endl;
+    cout << "3. * (Multiplication)" << endl;
+    cout << "4. / (Division)" << endl;
+    cout << "5. Calculate Total with Tax" << endl;
+
+    int choice;
+    cin >> choice;
+
+    double item1Price, item2Price, itemPrice;
+
+    switch (choice) {
+        case 1:
+            cout << "Enter prices of two items: ";
+            cin >> item1Price >> item2Price;
+            cout << "Result: " << add(item1Price, item2Price) << endl;
+            break;
+        case 2:
+            cout << "Enter prices of two items: ";
+            cin >> item1Price >> item2Price;
+            cout << "Result: " << subtract(item1Price, item2Price) << endl;
+            break;
+        case 3:
+            cout << "Enter prices of two items: ";
+            cin >> item1Price >> item2Price;
+            cout << "Result: " << multiply(item1Price, item2Price) << endl;
+            break;
+        case 4:
+            cout << "Enter prices of two items: ";
+            cin >> item1Price >> item2Price;
+            cout << "Result: " << divide(item1Price, item2Price) << endl;
+            break;
+        case 5:
+            cout << "Enter price of the item: ";
+            cin >> itemPrice;
+            cout << "Total with Tax: ₹" << calculateTotalWithTax(itemPrice) << endl;
+            break;
+        default:
+            cout << "Invalid choice." << endl;
+    }
+
+    return 0;
+}
