@@ -80,3 +80,25 @@ What are the different access modifiers in Java? Explain private, default (packa
 What is the difference between checked and unchecked exceptions in Java? Give examples of each.
 
 How do you create and use custom exceptions in Java? Provide a brief example.
+
+## 🔷 Programming
+# Basic Programming Questions
+
+5. Write a program to find the factorial of a number.
+6. Write a program to calculate the sum of the first n natural numbers.
+7. Write a program to reverse a string.
+8. Write a program to check if a number is a palindrome.
+9. Write a program to print the Fibonacci series up to n terms.
+10. Write a program to count the number of vowels in a given string.
+11. Write a program to find the GCD (Greatest Common Divisor) of two numbers.
+12. Write a program to check if a number is prime.
+13. Write a program to swap two numbers without using a temporary variable.
+14. Write a program to find the length of a string without using built-in functions.
+15. Write a program to print all the elements of an array.
+16. Write a program to find the sum of elements in an array.
+17. Write a program to remove duplicates from an array.
+18. Write a program to find the second largest element in an array.
+19. Write a program to sort an array using Bubble Sort.
+
+
+
